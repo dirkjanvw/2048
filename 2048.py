@@ -80,18 +80,33 @@ class Game:
             case 'l':
                 self.move_right()
 
-    def move_left(self) -> None:
-        """
-        """
-
     def move_right(self) -> None:
         """
         """
 
-        #for i in range(self.size):
-        #    new = [0 for k in range(self.size)]
-        #    p = self.size
-        #    for j in range(self.size):
+        for j in range(self.size):
+            new = [0 for k in range(self.size)]
+            p = self.size-1
+            for i in range(self.size):
+                if self.board[i][j] != 0:
+                    new[p] = self.board[i][j]
+                    p -= 1
+            for i in range(self.size):
+                self.board[i][j] = new[i]
+
+    def move_left(self) -> None:
+        """
+        """
+
+        for j in range(self.size):
+            new = [0 for k in range(self.size)]
+            p = 0
+            for i in range(self.size):
+                if self.board[i][j] != 0:
+                    new[p] = self.board[i][j]
+                    p += 1
+            for i in range(self.size):
+                self.board[i][j] = new[i]
 
     def move_down(self) -> None:
         """
@@ -133,7 +148,7 @@ def get_input() -> str:
 
 def main():
     # Initialise game
-    game = Game(4)
+    game = Game(10)
 
     # Play game
     while True:
