@@ -35,7 +35,7 @@ class Game:
             for i in range(self.size):
                 output += "="*(width+1)
             output += "\n"
-        
+
         # return
         return output
 
@@ -87,9 +87,14 @@ class Game:
         for j in range(self.size):
             new = [0 for k in range(self.size)]
             p = self.size-1
-            for i in range(self.size):
+            for i in range(self.size-1,-1,-1):
                 if self.board[i][j] != 0:
-                    new[p] = self.board[i][j]
+                    number = self.board[i][j]
+                    if p < self.size-1:
+                        if new[p+1] == number:
+                            number *= 2
+                            p += 1
+                    new[p] = number
                     p -= 1
             for i in range(self.size):
                 self.board[i][j] = new[i]
