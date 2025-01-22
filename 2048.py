@@ -2,6 +2,7 @@
 # Created by Dirk-Jan (2023)
 # Recreating the 2048 game in python.
 
+from sys import argv
 import random
 
 class Game:
@@ -166,16 +167,26 @@ def get_input() -> str:
 
     return move
 
-def main():
+def main(size: int):
     # Initialise game
-    game = Game(10)
+    game = Game(size)
 
     # Play game
     while True:
-        print(game)
-        game.play(get_input())
-        #print(game)
-        game.generate()
+        alive = True
+        while alive:
+            try:
+                print(game)
+                game.play(get_input())
+                #print(game)
+                game.generate()
+            except IndexError:
+                print("\n===== GAME OVER =====\n")
+                alive = False
+                game = Game(size)
 
 if __name__ == "__main__":
-    main()
+    if len(argv) == 2:
+        main(int(argv[1]))
+    else:
+        main(4)
